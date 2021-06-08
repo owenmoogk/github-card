@@ -10,27 +10,19 @@ export default function GithubCard(props) {
 	var description;
 
 	function getData() {
-		fetch('https://api.github.com/repos/' + props.username + '/' + props.repo, {
-			headers: {
-				authorization: 'token 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'
-			}
-		})
+		fetch('https://api.github.com/repos/' + props.username + '/' + props.repo)
 			.then(response => response.json())
 			.then(data => setData(data))
 	}
 
 	function getRateLimit() {
-		fetch('https://api.github.com/rate_limit', {
-			headers: {
-				authorization: 'token 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'
-			}
-		})
+		fetch('https://api.github.com/rate_limit')
 			.then(response => response.json())
 			.then(data => console.log(data))
 	}
 
 	function getColors() {
-		fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json')
+		fetch(process.env.PUBLIC_URL + '/colors.json')
 			.then(response => response.json())
 			.then(data => setColors(data))
 	}
