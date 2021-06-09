@@ -27,13 +27,13 @@ export default function GithubCard(props) {
 	}
 
 	function getColors() {
-		fetch(process.env.PUBLIC_URL + '/colors.json')
+		fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json')
 			.then(response => response.json())
 			.then(data => setColors(data))
 	}
 
 	function getEmojis() {
-		fetch(process.env.PUBLIC_URL + '/emojis.json')
+		fetch('https://api.github.com/emojis')
 			.then(response => response.json())
 			.then(data => setEmojis(data))
 	}
