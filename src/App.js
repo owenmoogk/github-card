@@ -14,7 +14,6 @@ export default function App() {
 		setRepo(document.getElementById('repoInput').value)
 		setIncludeZeros(document.getElementById('includeZeros').checked)
 		setIncludeUsername(document.getElementById('includeUsername').checked)
-		console.log(document.getElementById('includeZeros').checked)
 	}
 
 	return (
@@ -24,7 +23,7 @@ export default function App() {
 				<input placeholder='User' id='usernameInput' type='text'/>
 				<input placeholder='Repository' id='repoInput' type='text' />
 				<label><input type='checkbox' id='includeUsername' /><span>Include Username</span></label>
-				<label><input type='checkbox' id='includeZeros' /><span>Include Zero'd Icons (zero stars...etc)</span></label>
+				<label><input type='checkbox' id='includeZeros' /><span>Include Zero'd Icons (stars, forks, etc)</span></label>
 				<br/>
 				<button onClick={() => submit()}>Submit</button>
 			</div>

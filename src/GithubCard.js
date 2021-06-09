@@ -88,7 +88,7 @@ export default function GithubCard(props) {
 						<a style={{
 							'textDecoration': 'none',
 							'color': 'inherit'
-						}} href={data.html_url}>{data.name}</a>
+						}} href={data.html_url}>{props.includeUsername ? props.username+"/" : ""}{data.name}</a>
 					</span>
 				</div>
 				<div style={{
