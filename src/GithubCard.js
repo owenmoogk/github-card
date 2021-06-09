@@ -11,13 +11,12 @@ export default function GithubCard(props) {
 	var description;
 
 	function getData() {
-		if (!(props.username && props.repo)){
-			return
+		if (props.username && props.repo){
+			fetch('https://api.github.com/repos/' + props.username + '/' + props.repo)
+				.then(response => response.json())
+				.then(data => setData(data))
+				.then(getRateLimit())
 		}
-		fetch('https://api.github.com/repos/' + props.username + '/' + props.repo)
-			.then(response => response.json())
-			.then(data => setData(data))
-			.then(getRateLimit())
 	}
 
 	function getRateLimit() {
@@ -33,7 +32,7 @@ export default function GithubCard(props) {
 	}
 
 	function getEmojis() {
-		fetch('https://api.github.com/emojis')
+		fetch(process.env.PUBLIC_URL + '/emojis.json')
 			.then(response => response.json())
 			.then(data => setEmojis(data))
 	}
