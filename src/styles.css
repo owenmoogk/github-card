@@ -1,12 +1,12 @@
-*{
+* {
 	font-family: 'IBM Plex Sans', sans-serif;
 }
 
-body{
+body {
 	background-color: rgb(20, 20, 20);
 }
 
-h1{
+h1 {
 	border-bottom: 20px solid rgba(255, 255, 0, 0.5);
 	color: white;
 	width: fit-content;
@@ -17,12 +17,12 @@ h1{
 	font-style: italic;
 }
 
-#inputGroup{
+#inputGroup {
 	display: flex;
 	flex-direction: column;
 }
 
-input{
+input[type='text'] {
 	margin: auto;
 	background-color: rgba(255, 255, 255, 0.2);
 	outline: none;
@@ -33,20 +33,38 @@ input{
 	width: 200px;
 	color: white;
 }
-::placeholder{
+
+label {
+	display: inline-block;
+	padding-right: 10px;
+	white-space: nowrap;
+	color: white;
+	margin: auto;
+	user-select: none;
+}
+
+input[type='checkbox'] {
+	vertical-align: middle;
+}
+
+label span {
+	vertical-align: middle;
+}
+
+::placeholder {
 	color: lightgray
 }
 
-button{
+button {
 	width: fit-content;
 	margin: auto;
 }
 
-#mainCard{
+#mainCard {
 	margin: auto;
 }
 
-textarea{
+textarea {
 	background-color: rgb(50, 50, 50);
 	color: white;
 	resize: none;
@@ -58,7 +76,7 @@ textarea{
 	height: 400px;
 }
 
-#downloadButton a{
+#downloadButton a {
 	color: white;
 	border-bottom: 2px solid white;
 	font-size: 20px;
@@ -67,7 +85,7 @@ textarea{
 	width: 100%;
 }
 
-#downloadButton{
+#downloadButton {
 	text-align: center;
 }
 
