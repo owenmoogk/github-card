@@ -6,19 +6,24 @@ export default function GithubCard(props) {
 	const [data, setData] = useState()
 	const [colors, setColors] = useState()
 	const [emojis, setEmojis] = useState()
+	const [rateLimit, setRateLimit] = useState(60)
 
 	var description;
 
 	function getData() {
+		if (!(props.username && props.repo)){
+			return
+		}
 		fetch('https://api.github.com/repos/' + props.username + '/' + props.repo)
 			.then(response => response.json())
 			.then(data => setData(data))
+			.then(getRateLimit())
 	}
 
 	function getRateLimit() {
 		fetch('https://api.github.com/rate_limit')
 			.then(response => response.json())
-			.then(data => console.log(data))
+			.then(data => setRateLimit(data.rate.remaining))
 	}
 
 	function getColors() {
@@ -116,6 +121,9 @@ export default function GithubCard(props) {
 
 	return (
 		<div>
+			<div id='rateLimit'>
+					{rateLimit} / 60 <br/><span>Requests</span>
+			</div>
 			{data && colors && emojis
 				? loadedPage()
 				: null

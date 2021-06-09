@@ -70,3 +70,17 @@ textarea{
 #downloadButton{
 	text-align: center;
 }
+
+#rateLimit {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	color: grey;
+	font-size: 20px;
+}
+
+#rateLimit span {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: grey;
+}
