@@ -32,7 +32,7 @@ export default function GithubCard(props) {
 	}
 
 	function getEmojis() {
-		fetch(process.env.PUBLIC_URL + '/emojis.json')
+		fetch('/emojis.json')
 			.then(response => response.json())
 			.then(data => setEmojis(data))
 	}

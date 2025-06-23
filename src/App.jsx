@@ -29,7 +29,7 @@ export default function App() {
 			</div>
 			<br/>
 			<GithubCard username={username} repo={repo} includeUsername={includeUsername} includeZeros={includeZeros}/>
-			<p id='downloadButton'><a href={process.env.PUBLIC_URL + '/GithubCardDownload.js'}download>Download React Component</a></p>
+			<p id='downloadButton'><a href={'/GithubCardDownload.js'}download>Download React Component</a></p>
 		</div>
 	);
 }
