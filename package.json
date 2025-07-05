@@ -1,7 +1,8 @@
 {
-	"homepage": "https://github.com/owenmoogk/github-card/",
+	"homepage": "https://owenmoogk.github.io/github-repo-card/",
+	"repository": "https://github.com/owenmoogk/github-repo-card",
 	"name": "github-repo-card",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": [
