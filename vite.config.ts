@@ -22,7 +22,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@my-component': path.resolve(__dirname, 'src/component'),
+      '@component': path.resolve(__dirname, 'src/component'),
     }    
   },
   server: {

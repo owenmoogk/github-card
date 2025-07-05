@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './styles.css'
-import { GithubCard } from '../component/GithubCard'
+import { GithubCard } from '@component/GithubCard'
 
 export default function App() {
 

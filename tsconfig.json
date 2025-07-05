@@ -10,7 +10,7 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
-      "@my-component/*": [
+      "@component/*": [
         "component/*"
       ]
     }
