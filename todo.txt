@@ -1,0 +1,1 @@
+make this deploy from github from releasing a tag, that would be pretty cool!
