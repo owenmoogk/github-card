@@ -1,4 +1,4 @@
-{
+export const emojis: Partial<Record<string, string>> = {
 	"+1": "https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8",
 	"-1": "https://github.githubassets.com/images/icons/emoji/unicode/1f44e.png?v8",
 	"100": "https://github.githubassets.com/images/icons/emoji/unicode/1f4af.png?v8",

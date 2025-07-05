@@ -1,53 +1,47 @@
-import { useEffect, useState } from 'react';
-import React from 'react'
+import { ReactNode, useEffect, useState } from 'react';
+import { GithubRepoAPIReturn, ProgrammingLanguageColors } from './types';
+import {emojis} from "./emojis"
 
-export default function GithubCard(props) {
+export const GithubCard = (props: {username: string, repo: string, includeZeros?: boolean, includeUsername?: boolean, setRateLimit?: (remaining: number, limit: number) => void}): ReactNode => {
 
-	const [data, setData] = useState()
-	const [colors, setColors] = useState()
-	const [emojis, setEmojis] = useState()
-	const [rateLimit, setRateLimit] = useState(60)
+	const [data, setData] = useState<GithubRepoAPIReturn>()
+	const [colors, setColors] = useState<ProgrammingLanguageColors>()
 
 	var description;
 
 	function getData() {
 		if (props.username && props.repo){
 			fetch('https://api.github.com/repos/' + props.username + '/' + props.repo)
-				.then(response => response.json())
+				.then(response =>  response.json())
 				.then(data => setData(data))
-				.then(getRateLimit())
+				.then(() => getRateLimit())
 		}
 	}
 
 	function getRateLimit() {
 		fetch('https://api.github.com/rate_limit')
-			.then(response => response.json())
-			.then(data => setRateLimit(data.rate.remaining))
+			.then(response =>  response.json())
+			.then(data => props.setRateLimit?(data.rate.remaining, data.rate.limit): null)
 	}
 
 	function getColors() {
 		fetch('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json')
-			.then(response => response.json())
+			.then(response =>  response.json())
 			.then(data => setColors(data))
 	}
 
-	function getEmojis() {
-		fetch('/emojis.json')
-			.then(response => response.json())
-			.then(data => setEmojis(data))
-	}
 
 	useEffect(() => {
 		getColors()
-		getEmojis()
 	}, []);
 
 	useEffect(() => {
 		getData()
-		getRateLimit()
+	getRateLimit()
 	}, [props])
 
-	function loadedPage() {
+
+		if (!data  || !colors) return;
 
 		description = (data.description || '').replace(/:\w+:/g, function (match) {
 			const name = match.substring(1, match.length - 1);
@@ -98,11 +92,11 @@ export default function GithubCard(props) {
 					<a style={{
 						'color': 'inherit',
 						'textDecoration': 'none'
-					}} href={data.fork ? data.source.html_url : ''}>{data.fork ? data.source.full_name : ''}</a></div>
+					}} href={data.fork ? data.source?.html_url : ''}>{data.fork ? data.source?.full_name : ''}</a></div>
 				<div style={{ 'fontSize': '12px', 'marginBottom': '16px', 'marginTop': '8px', 'color': '#586069' }} dangerouslySetInnerHTML={{ __html: description }}></div>
 				<div style={{ 'fontSize': '12px', 'color': '#586069', 'display': 'flex' }}>
 					<div style={{ 'display': data.language ? '' : 'none', 'marginRight': '16px' }}>
-						<span style={{ 'width': '12px', 'height': '12px', 'borderRadius': '100%', 'backgroundColor': data.language ? colors[data.language].color : '', 'display': 'inline-block', 'top': '1px', 'position': 'relative' }}></span>
+						<span style={{ 'width': '12px', 'height': '12px', 'borderRadius': '100%', 'backgroundColor': data.language ? colors[data.language].color  ?? "" : '', 'display': 'inline-block', 'top': '1px', 'position': 'relative' }}></span>
 						<span> {data.language}</span>
 					</div>
 					<div style={{ 'display': props.includeZeros ? "flex" : data.stargazers_count === 0 ? 'none' : 'flex', 'alignItems': 'center', 'marginRight': '16px' }}>
@@ -118,15 +112,3 @@ export default function GithubCard(props) {
 		)
 	}
 
-	return (
-		<div>
-			<div id='rateLimit'>
-					{rateLimit} / 60 <br/><span>Requests</span>
-			</div>
-			{data && colors && emojis
-				? loadedPage()
-				: null
-			}
-		</div>
-	);
-}
