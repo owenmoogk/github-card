@@ -19,3 +19,5 @@ export const myComponent: FC = () => (
   />
 );
 ```
+
+Available on [NPM](https://www.npmjs.com/package/github-repo-card) and [Yarn](https://yarnpkg.com/package?q=github-repo-card&name=github-repo-card).
