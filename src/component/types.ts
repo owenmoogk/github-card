@@ -88,7 +88,7 @@ export type GithubRepoAPIReturn = {
   archived: boolean;
   disabled: boolean;
   open_issues_count: number;
-  license: { [key: string]: any } | null;
+  // license: { [key: string]: any } | null;
   allow_forking: boolean;
   is_template: boolean;
   web_commit_signoff_required: boolean;
@@ -103,7 +103,7 @@ export type GithubRepoAPIReturn = {
   subscribers_count: number;
   parent?: GithubRepoAPIReturn;
   source?: GithubRepoAPIReturn;
-}
+};
 
 export type ProgrammingLanguage = {
   color: string | null;
