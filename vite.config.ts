@@ -18,7 +18,7 @@ export default defineConfig({
   base: 'github-repo-card',
   root: path.resolve(__dirname, 'src/website'),
   build: {
-    outDir: path.resolve(__dirname, 'dist-demo'),
+    outDir: path.resolve(__dirname, 'dist-site'),
     emptyOutDir: true,
   },
   resolve: {
