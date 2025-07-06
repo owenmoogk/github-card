@@ -15,7 +15,7 @@
     "src/component/**/*"
   ],
   "exclude": [
-    "src/dev-website/**/*",
+    "src/website/**/*",
     "node_modules"
   ]
 }

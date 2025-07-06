@@ -15,7 +15,8 @@ export default defineConfig({
     //   failOnError: false, // error doesn't block compilation
     // })
   ],
-  root: path.resolve(__dirname, 'src/dev-website'),
+  base: 'github-repo-card',
+  root: path.resolve(__dirname, 'src/website'),
   build: {
     outDir: path.resolve(__dirname, 'dist-demo'),
     emptyOutDir: true,
