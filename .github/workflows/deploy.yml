@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - '*'
-
     tags:
       - 'v*'
 
@@ -29,8 +28,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       
-      - name: Build
+      - name: Build site
         run: yarn build:site
+      
+      - name: Build component
+        run: yarn build:component
       
       - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3
@@ -40,12 +42,24 @@ jobs:
       - name: Archive build for release
         if: startsWith(github.ref, 'refs/tags/v')
         run: zip -r dist-site.zip dist-site/
-      - name: Upload release artifact
+      
+      - name: Archive package for release
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: zip -r package.zip dist/
+      
+      - name: Upload release artifact (site)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v4
         with:
           name: dist-site-zip
           path: dist-site.zip
+      
+      - name: Upload release artifact (package)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-zip
+          path: package.zip
 
   test:
     name: Test
@@ -74,10 +88,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, test]
     steps:
-      - name: Download build artifact
+      - name: Download build artifact (site)
         uses: actions/download-artifact@v4
         with:
           name: dist-site-zip
+      
+      - name: Download build artifact (package)
+        uses: actions/download-artifact@v4
+        with:
+          name: package-zip
+      
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -90,8 +110,9 @@ jobs:
           prerelease: false
           body: |
             Automated release for ${{ github.ref_name }}.
-            Includes build artifacts in dist-site-${{ github.ref_name }}.zip.
-      - name: Upload Release Asset
+            Includes build artifacts in dist-site-${{ github.ref_name }}.zip and package-${{ github.ref_name }}.zip.
+      
+      - name: Upload Release Asset (site)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -100,6 +121,17 @@ jobs:
           asset_path: dist-site.zip
           asset_name: dist-site-${{ github.ref_name }}.zip
           asset_content_type: application/zip
+      
+      - name: Upload Release Asset (package)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: package.zip
+          asset_name: package-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
+
   deploy:
     if: startsWith(github.ref, 'refs/tags/v')
     environment:
@@ -133,7 +165,7 @@ jobs:
 
       - name: Build component
         run: yarn build:component
-        
+      
       - name: Echo Secret
         env:
           MY_SECRET: ${{ secrets.NPM_TOKEN }}
