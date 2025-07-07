@@ -131,6 +131,11 @@ jobs:
 
       - name: Build component
         run: yarn build:component
+        
+      - name: Debug NPM_TOKEN
+        run: echo "NPM_TOKEN is set: ${NODE_AUTH_TOKEN:-not set}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to npm
         run: npm publish
