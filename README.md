@@ -12,10 +12,10 @@ import { GithubCard } from 'github-repo-card';
 export const myComponent: FC = () => (
   <GithubCard
     setRateLimit={(remaining: number, limit: number) => console.log(remaining, limit)}
-    includeUsername={true}
-    includeZeros={true}
+    showUsername
+    showZeros
     username="owenmoogk"
-    repo="owenmoogk.github.io"
+    repository="owenmoogk.github.io"
   />
 );
 ```
