@@ -1,1 +1,1 @@
-src/website dist-dev dist-demo tsconfig.json tsconfig.build.json vite.config.ts
+src/website dist-site tsconfig.json tsconfig.build.json vite.config.ts

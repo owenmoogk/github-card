@@ -30,7 +30,13 @@ export default [
   })),
 
   {
-    ignores: ['**/node_modules/', '**/build/', '**/dist/', '**/*d.ts'],
+    ignores: [
+      '**/node_modules/',
+      '**/build/',
+      '**/dist/',
+      '**/dist-site/',
+      '**/*d.ts',
+    ],
   },
 
   {
