@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react';
 import { emojis } from './emojis';
 import type { GithubRepoAPIReturn, ProgrammingLanguageColors } from './types';
 
-export const GithubCard = (props: {
+export type GithubCardProps = {
   username: string;
-  repo: string;
-  includeZeros?: boolean;
-  includeUsername?: boolean;
+  repository: string;
+  showZeros?: boolean;
+  showUsername?: boolean;
   setRateLimit?: (remaining: number, limit: number) => void;
-}): ReactNode => {
+};
+
+export const GithubCard = (props: GithubCardProps): ReactNode => {
   const [data, setData] = useState<GithubRepoAPIReturn>();
   const [colors, setColors] = useState<ProgrammingLanguageColors>();
 
@@ -65,7 +67,7 @@ export const GithubCard = (props: {
         );
     }
 
-    getData(props.username, props.repo);
+    getData(props.username, props.repository);
     getRateLimit();
   }, [props]);
 
@@ -136,7 +138,7 @@ export const GithubCard = (props: {
             }}
             href={data.html_url}
           >
-            {props.includeUsername ? props.username + '/' : ''}
+            {props.showUsername ? props.username + '/' : ''}
             {data.name}
           </a>
         </span>
@@ -189,7 +191,7 @@ export const GithubCard = (props: {
         </div>
         <div
           style={{
-            display: props.includeZeros
+            display: props.showZeros
               ? 'flex'
               : data.stargazers_count === 0
                 ? 'none'
@@ -216,7 +218,7 @@ export const GithubCard = (props: {
         </div>
         <div
           style={{
-            display: props.includeZeros
+            display: props.showZeros
               ? 'flex'
               : data.forks === 0
                 ? 'none'

@@ -1,20 +1,16 @@
 import { useState } from 'react';
 
 import './styles.css';
+import type { GithubCardProps } from '@component/GithubCard';
 import { GithubCard } from '@component/GithubCard';
 
 export default function App() {
   const [username, setUsername] = useState<string>();
-  const [repo, setRepo] = useState<string>();
-  const [includeUsername, setIncludeUsername] = useState<boolean>(false);
-  const [includeZeros, setIncludeZeros] = useState<boolean>(false);
+  const [repository, setRepo] = useState<string>();
+  const [showUsername, setIncludeUsername] = useState<boolean>(false);
+  const [showZeros, setIncludeZeros] = useState<boolean>(false);
 
-  const [cardProps, setCardProps] = useState<{
-    username: string;
-    repo: string;
-    includeUsername: boolean;
-    includeZeros: boolean;
-  }>();
+  const [cardProps, setCardProps] = useState<GithubCardProps>();
 
   return (
     <div className="App">
@@ -52,8 +48,13 @@ export default function App() {
         <button
           onClick={() =>
             username &&
-            repo &&
-            setCardProps({ username, repo, includeUsername, includeZeros })
+            repository &&
+            setCardProps({
+              username,
+              repository,
+              showUsername,
+              showZeros,
+            })
           }
         >
           Submit
