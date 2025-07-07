@@ -2,7 +2,7 @@
 	"homepage": "https://owenmoogk.github.io/github-repo-card/",
 	"repository": "https://github.com/owenmoogk/github-repo-card",
 	"name": "github-repo-card",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": [
@@ -16,7 +16,9 @@
 		"typecheck": "tsc --noEmit",
 		"test": "yarn lint && yarn typecheck",
 		"preview": "vite preview",
-		"prepublishOnly": "npm run build:component"
+		"ver:major": "yarn version --major && git push && git push --tags",
+		"ver:minor": "yarn version --minor && git push && git push --tags",
+		"ver:patch": "yarn version --patch && git push && git push --tags"
 	},
 	"peerDependencies": {
 		"react": "^17.0.0 || ^18.0.0 || ^19.0.0",
