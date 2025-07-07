@@ -128,14 +128,11 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        working-directory: src/component
 
       - name: Build component
         run: yarn build:component
-        working-directory: src/component
 
       - name: Publish to npm
         run: npm publish
-        working-directory: src/component
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
