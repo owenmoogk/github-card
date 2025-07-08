@@ -92,26 +92,24 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-site-zip
-      
+
       - name: Download build artifact (package)
         uses: actions/download-artifact@v4
         with:
           name: package-zip
-      
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+
+      - name: Create Release and Upload Assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-          body: |
-            Automated release for ${{ github.ref_name }}.
-            Includes build artifacts in dist-site-${{ github.ref_name }}.zip and package-${{ github.ref_name }}.zip.
-      
+        run: |
+          gh release create ${{ github.ref_name }} \
+            --title "${{ github.ref_name }}" \
+            --notes "Automated release for ${{ github.ref_name }}. Includes build artifacts in dist-site-${{ github.ref_name }}.zip and package-${{ github.ref_name }}.zip." \
+            --draft=false \
+            --prerelease=false \
+            dist-site.zip#dist-site-${{ github.ref_name }}.zip \
+            package.zip#package-${{ github.ref_name }}.zip
+        
       - name: Upload Release Asset (site)
         uses: actions/upload-release-asset@v1
         env:
