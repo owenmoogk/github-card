@@ -7,7 +7,11 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
-
+    inputs:
+      tag_name:
+        description: 'Tag name for simulated release (e.g., v2.0.5)'
+        required: false
+        
 permissions:
   contents: write
   pages: write
