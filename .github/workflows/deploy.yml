@@ -166,11 +166,6 @@ jobs:
       - name: Build component
         run: yarn build:component
       
-      - name: Echo Secret
-        env:
-          MY_SECRET: ${{ secrets.NPM_TOKEN }}
-        run: echo "The secret is $MY_SECRET"
-      
       - name: Publish to npm
         run: npm publish
         env:
