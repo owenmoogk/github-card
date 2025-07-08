@@ -6,11 +6,6 @@ on:
       - '*'
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      tag_name:
-        description: 'Tag name for simulated release (e.g., v2.0.5)'
-        required: false
         
 permissions:
   contents: write
@@ -103,22 +98,10 @@ jobs:
         with:
           name: package-zip
 
-      - name: Debug - List files
-        run: |
-          echo "Listing files in workspace:"
-          ls -la
-          echo "Checking for dist-site.zip and package.zip:"
-          find . -name "*.zip"
-
       - name: Rename artifacts
         run: |
           mv dist-site.zip dist-site-${{ github.ref_name }}.zip
           mv package.zip package-${{ github.ref_name }}.zip
-
-      - name: Debug - List files after rename
-        run: |
-          echo "Listing files after rename:"
-          ls -la
 
       - name: Release
         uses: softprops/action-gh-release@v2
