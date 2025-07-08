@@ -2,7 +2,7 @@
 	"homepage": "https://owenmoogk.github.io/github-repo-card/",
 	"repository": "https://github.com/owenmoogk/github-repo-card",
 	"name": "github-repo-card",
-	"version": "2.0.3",
+	"version": "2.0.2",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"files": [
