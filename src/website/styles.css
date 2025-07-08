@@ -94,3 +94,11 @@ textarea {
 	text-transform: uppercase;
 	color: grey;
 }
+
+pre { 
+	background: #f4f4f4;
+	font-family: monospace;
+	width: fit-content;
+	padding: 3px;
+	border-radius: 5px;
+}
